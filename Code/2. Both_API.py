@@ -5,6 +5,8 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 foursquare_csv_path = os.path.join(script_dir, 'foursquare_results.csv')
 yelp_csv_path = os.path.join(script_dir, 'yelp_results.csv')
+foursquare_key = os.environ.get('FOURSQUARE_API_KEY')
+yelp_key = os.environ.get("YELP_API_KEY")
 
 YELP_SEARCH_URL = "https://api.yelp.com/v3/businesses/search"
 FOURSQUARE_SEARCH_URL = "https://api.foursquare.com/v3/places/search"
@@ -44,7 +46,7 @@ for station in range(50):
 
     headers = {
         "Accept": "application/json",
-        "Authorization": "fsq3Nw/fR0XoqtoRT5LtvGCoAEz1vkHCNj32ho57y6khuzM="
+        "Authorization": foursquare_key
     }
 
     foursquare_response = requests.request("GET", FOURSQUARE_SEARCH_URL, params=foursquare_params, headers=headers)
@@ -73,7 +75,7 @@ for station in range(50):
     # Query Yelp API for cafes and bars near the current station
     yelp_headers = {
         "Accept": "application/json",        
-        "Authorization": f"Bearer {'9W3Ud31Ji8Kpg5dC3iufULCUIiMoggC9VrpbC36s-eyL1KNmUSW7YwaptH-erVWJwd5vVEH8NbZWjJJJuYlLQx97jgowRSQF0oRDlOIPPYe3kb_GWp7C5WutYD42ZXYx'}"
+        "Authorization": f"Bearer {yelp_key}"
     }
     yelp_params = {
         'latitude': lat,
